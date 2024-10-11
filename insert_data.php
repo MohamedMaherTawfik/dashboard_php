@@ -33,4 +33,31 @@ if(isset($_POST['add_data'])){
 }
 }
 
+if(isset($_POST['add_client_image'])){
+   
+    $file_name = $_FILES['image']['name'];
+    $tempname= $_FILES['image']['tmp_name'];
+    $folder = "images/".$file_name;
+
+    $query="INSERT INTO `clients`(`client_images`) VALUES ('$file_name')";
+
+    if(move_uploaded_file($tempname,$folder)){
+        echo "client_image uploaded successfully";
+    }
+    else{
+        echo "client_image not uploaded";
+    }
+
+    $result = mysqli_query($connection,$query);
+
+    if(!$result){
+        die(mysqli_error($connection));
+    }
+    else{
+        header('location: index.php?insert_msg=image uploaded successfully');
+    }
+}
+
 ?>
+
+

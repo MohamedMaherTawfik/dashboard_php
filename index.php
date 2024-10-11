@@ -3,15 +3,28 @@
 <?php 
 
 ?>
+<form action="" method="POST" enctype="multipart/form-data">
+<input type="file" name="image">
+<br><br>
+<input type="submit" name="add_client_image">
+</form>
         <!--Start clients-sec -->
         <section class="clients-sec">
             <div class="container">
                 <div class="swiper-container clients-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="images/clients-1.png" alt="" class="partner-img wow zoomIn"
-                                data-wow-duration="2s" />
-                        </div>
+                        <?php
+                        $result=mysqli_query($connection,' SELECT * FROM `clients` ');
+                        while($row = mysqli_fetch_assoc($result)){
+                        
+                            ?>
+                            <div class="swiper-slide">
+                                <img src="images/<?php echo $row['client_images'] ?>" alt="" />
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        
                         
                     </div>
                 </div>
